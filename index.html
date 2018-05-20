@@ -9,16 +9,19 @@
 
 <!-- Latest compiled and minified JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
 <script>
 	var recognition = new webkitSpeechRecognition();
 	recognition.continuous = true;
 	//recognition.interimResults = true;
 	function start(){
 		recognition.onresult = function(event) { 
-			//event.results[i][0].transcript;
-            event.results.forEach(function(item) {
-                $("#output").append(item[0].transcript);
-            });
+			console.log(event);
+			var output = document.getElementById("output");
+			output.innerHTML = "";
+			for(var i=0; i<event.results.length; i++){
+				$("#output").append(event.results[i][0].transcript);
+			}
 		}
 		recognition.start();
 	}
@@ -37,5 +40,4 @@
     <div id = "output"></div>
     
 </body>
-
 </html>
