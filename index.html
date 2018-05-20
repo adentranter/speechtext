@@ -6,12 +6,10 @@
 	//recognition.interimResults = true;
 	function start(){
 		recognition.onresult = function(event) { 
-			console.log(event);
-			var output = document.getElementById("output");
-			output.innerHTML = "";
-			for(var i=0; i<event.results.length; i++){
-				output.innerHTML = output.innerHTML + event.results[i][0].transcript;
-			}
+			//event.results[i][0].transcript;
+            event.results.forEach(function(item) {
+                $("#output").append(item[0].transcript);
+            });
 		}
 		recognition.start();
 	}
@@ -25,7 +23,7 @@
 <body>
 	<h1>Speach to text</h1>
     <input id = "bStart" type = "button" value = "Start" onclick = "start();">
-    <input id = "stop" type = "button" value = "Start" onclick = "stop();">
+    <input id = "stop" type = "button" value = "Stop" onclick = "stop();">
 
     <div id = "output"></div>
     
